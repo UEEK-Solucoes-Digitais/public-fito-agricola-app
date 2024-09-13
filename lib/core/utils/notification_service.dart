@@ -36,7 +36,6 @@ class NotificationService {
   void initialize() {
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
     _setupNotifications();
-    PrefUtils().setNotificationInitialized(true);
   }
 
   void setNavigatorKey(GlobalKey<NavigatorState> key) {
@@ -120,12 +119,10 @@ class NotificationService {
 
   showNotification(CustomNotification notification) {
     androidDetails = const AndroidNotificationDetails(
-      'notifications',
-      "Notificação",
-      importance: Importance.max,
-      priority: Priority.max,
-      icon: '@drawable/ic_notification',
-    );
+        'notifications', "Notificação",
+        importance: Importance.max,
+        priority: Priority.max,
+        icon: '@drawable/ic_notification');
 
     iosDetails = const DarwinNotificationDetails(
       presentAlert: true,

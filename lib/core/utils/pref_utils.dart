@@ -29,16 +29,9 @@ class PrefUtils {
     print('SharedPreference Initialized');
   }
 
-  // check if _sharedPreferences is null
-  bool get isInitialized => _sharedPreferences != null;
-
   ///will clear all the data stored in preference
   Future<void> clearPreferencesData() async {
     _sharedPreferences!.clear();
-  }
-
-  Future<void> reload() async {
-    await _sharedPreferences!.reload();
   }
 
   Future<void> clearApiPreferencesData() async {
@@ -347,28 +340,5 @@ class PrefUtils {
 
   Future<List<String>> getAllRoutes() {
     return DatabaseHelper().getAllRoutes();
-  }
-
-  Future<bool> isSync() async {
-    bool? isSync = _sharedPreferences!.getBool('isSync');
-
-    return isSync == null ? false : isSync;
-  }
-
-  Future<void> setSync(bool value) {
-    return _sharedPreferences!.setBool('isSync', value);
-  }
-
-  Future<bool> isNotificationInitialized() async {
-    bool? isNotificationInitialized =
-        _sharedPreferences!.getBool('isNotificationInitialized');
-
-    return isNotificationInitialized == null
-        ? false
-        : isNotificationInitialized;
-  }
-
-  Future<void> setNotificationInitialized(bool value) {
-    return _sharedPreferences!.setBool('isNotificationInitialized', value);
   }
 }

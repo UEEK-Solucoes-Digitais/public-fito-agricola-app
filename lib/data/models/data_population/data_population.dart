@@ -22,10 +22,7 @@ class DataPopulation {
   factory DataPopulation.fromJson(Map<String, dynamic> json) {
     return DataPopulation(
       id: json['id'],
-      propertyManagementDataSeedId:
-          json['property_management_data_seed_id'] != null
-              ? json['property_management_data_seed_id']
-              : 0,
+      propertyManagementDataSeedId: json['property_management_data_seed_id'],
       seedPerLinearMeter:
           double.parse(json['seed_per_linear_meter'].toString()),
       seedPerSquareMeter:

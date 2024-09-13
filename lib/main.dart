@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitoagricola/core/utils/background_services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fitoagricola/core/utils/check_validation.dart';
 import 'package:fitoagricola/core/utils/firebase_messaging_services.dart';
 import 'package:fitoagricola/core/utils/notification_service.dart';
-import 'package:fitoagricola/core/utils/workmanager_task.dart';
 import 'package:fitoagricola/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,7 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:provider/provider.dart' as provider;
 import 'package:provider/provider.dart';
-import 'package:workmanager/workmanager.dart';
 
 import 'core/app_export.dart';
 
@@ -28,50 +25,6 @@ var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 //   }
 // }
 
-// Future main() async {
-//   await dotenv.load();
-//   await PrefUtils().init();
-//   final notificationService = NotificationService();
-//   notificationService.initialize();
-//   notificationService.setNavigatorKey(NavigatorService.navigatorKey);
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   await initializeService();
-
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Future.wait([
-//     FlutterDownloader.initialize(debug: true, ignoreSsl: true),
-//     FMTCObjectBoxBackend().initialise(),
-//     FirebaseMessagingService(notificationService).initialize(),
-//   ]).then((value) {
-//     runApp(
-//       MultiProvider(
-//         providers: [
-//           provider.Provider<NotificationService>(
-//             create: (context) => NotificationService(),
-//           ),
-//           provider.Provider<FirebaseMessagingService>(
-//             create: (context) => FirebaseMessagingService(
-//               context.read<NotificationService>(),
-//             ),
-//           ),
-//         ],
-//         child: ProviderScope(
-//           child: MyApp(),
-//         ),
-//       ),
-//     );
-//   });
-// }
-
-@pragma('vm:entry-point')
-void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) async {
-    // Aqui você chama a função que executa a lógica em segundo plano
-    await performBackgroundTask();
-    return Future.value(true);
-  });
-}
-
 @pragma('vm:entry-point')
 void handleMessage(
     RemoteMessage message, NotificationService notificationService) {
@@ -84,13 +37,7 @@ void handleMessage(
 }
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   await dotenv.load();
-  await PrefUtils().init();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   final notificationService = NotificationService();
   notificationService.initialize();
   notificationService.setNavigatorKey(NavigatorService.navigatorKey);
@@ -106,8 +53,6 @@ Future main() async {
   await PrefUtils().init();
 
   await CheckValidation.checkValidation();
-
-  await initializeService();
 
   WidgetsFlutterBinding.ensureInitialized();
   Future.wait([

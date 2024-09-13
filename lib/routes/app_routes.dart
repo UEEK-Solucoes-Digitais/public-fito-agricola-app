@@ -11,10 +11,8 @@ import 'package:fitoagricola/presentation/reports_screen/reports_screen.dart';
 import 'package:fitoagricola/presentation/settings_screen/settings_screen.dart';
 import 'package:fitoagricola/presentation/user_screen/user_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fitoagricola/presentation/splash_screen/splash_screen.dart';
 import 'package:fitoagricola/presentation/login_screen/login_screen.dart';
 import 'package:fitoagricola/presentation/home_screen/home_screen.dart';
-import 'package:fitoagricola/presentation/app_navigation_screen/app_navigation_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -66,10 +64,8 @@ class AppRoutes {
   static const String assetScreen = '/assets_screen';
 
   static Map<String, WidgetBuilder> routes = {
-    splashScreen: (context) => SplashScreen(),
     loginScreen: (context) => LoginScreen(),
     homeScreen: (context) => HomeScreen(),
-    appNavigationScreen: (context) => AppNavigationScreen(),
     initialRoute: (context) => LoginScreen(),
     logout: (context) => LogoutFunction(),
     reportsScreen: (context) => ReportsScreen(),

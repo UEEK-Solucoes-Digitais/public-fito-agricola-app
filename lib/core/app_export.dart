@@ -4,7 +4,6 @@ export 'package:fitoagricola/core/utils/navigator_service.dart';
 export 'package:fitoagricola/core/utils/pref_utils.dart';
 export 'package:fitoagricola/core/utils/size_utils.dart';
 export 'package:fitoagricola/data/models/selectionPopupModel/selection_popup_model.dart';
-export 'package:fitoagricola/localization/app_localization.dart';
 export 'package:fitoagricola/routes/app_routes.dart';
 export 'package:fitoagricola/theme/app_decoration.dart';
 export 'package:fitoagricola/theme/custom_text_style.dart';

@@ -80,7 +80,6 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   _checkPostFunction() async {
-    await PrefUtils().reload();
     List operations = PrefUtils().getAllPostRequest();
 
     if (operations.isNotEmpty) {

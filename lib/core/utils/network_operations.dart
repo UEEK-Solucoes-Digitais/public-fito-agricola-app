@@ -20,29 +20,33 @@ class NetworkOperations {
     return await (Connectivity().checkConnectivity());
   }
 
-  static Future<void> checkPostQueue({bool showNotification = true}) async {
+  static Future<void> checkPostQueue() async {
     try {
       bool hasConnection = await checkConnection();
 
-      print(hasConnection);
       if (hasConnection) {
         List operations = PrefUtils().getAllPostRequest();
 
         if (operations.isNotEmpty) {
-          PrefUtils().setSync(true);
-
-          if (showNotification) {
-            await NotificationService().showNotification(
-              CustomNotification(
-                id: 0,
-                title: 'Sincronizando',
-                body: "Enviando lançamentos offline para o sistema",
-                payload: 'offline_sync',
-              ),
-            );
-          }
+          await NotificationService().showNotification(
+            CustomNotification(
+              id: 0,
+              title: 'Sincronizando',
+              body: "Enviando lançamentos offline para o sistema",
+              payload: 'offline_sync',
+            ),
+          );
 
           for (var operation in operations) {
+            // PrefUtils().storePostRequest("request_${operation['timestamp']}", {
+            //   "name": operation['name'],
+            //   "url": operation['url'],
+            //   "body": operation['body'],
+            //   "filePaths": operation['filePaths'],
+            //   "timestamp": operation['timestamp'],
+            //   "status": 1,
+            // });
+            // print(operation);
             await PostRequestOperations.postOffline(operation).then(
               (value) async {
                 if (value) {
@@ -59,17 +63,15 @@ class NetworkOperations {
                     "status": 3,
                   });
 
-                  if (showNotification) {
-                    NotificationService().showNotification(
-                      CustomNotification(
-                        id: 0,
-                        title: 'Erro',
-                        body:
-                            "Erro ao enviar ${operation['name']} offline para o sistema",
-                        payload: 'offline_sync',
-                      ),
-                    );
-                  }
+                  NotificationService().showNotification(
+                    CustomNotification(
+                      id: 0,
+                      title: 'Erro',
+                      body:
+                          "Erro ao enviar ${operation['name']} offline para o sistema",
+                      payload: 'offline_sync',
+                    ),
+                  );
                 }
               },
             ).catchError((error, stackTrace) {
@@ -77,11 +79,9 @@ class NetworkOperations {
               Logger().e(error);
             });
           }
-          PrefUtils().setSync(false);
         }
       }
     } catch (e, stackTrace) {
-      PrefUtils().setSync(false);
       ErrorLog.logError(e.toString(), stackTrace);
       Logger().e(e);
     }
