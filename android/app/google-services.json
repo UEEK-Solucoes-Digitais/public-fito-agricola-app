@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093242658722",
+    "project_id": "fitoagricolaapp",
+    "storage_bucket": "fitoagricolaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093242658722:android:326f5f333241b6cbae5cfb",
+        "android_client_info": {
+          "package_name": "com.fitoagricola.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCe1_ANYmY0Ph3uVq1ocsPJMhcLALhdmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
